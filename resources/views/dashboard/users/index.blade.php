@@ -82,7 +82,7 @@
                     data: null,
                     render: function(data, type, row, meta) {
                         return `<a href="/users/${data.id}/edit"><i class="bx bxs-pencil"></i></a> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#modaldelete" data-action="/letter-user/${data.id}"><i class="bx bx-trash text-danger"></i></a>`
+                                            data-bs-target="#modaldelete" data-action="/users/${data.id}"><i class="bx bx-trash text-danger"></i></a>`
                     }
                 }]
             })

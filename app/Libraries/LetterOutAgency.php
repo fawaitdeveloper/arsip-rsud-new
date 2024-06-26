@@ -76,6 +76,10 @@ class LetterOutAgency
                 'access' => "F",
                 "group" => $request->type
             ];
+            /**
+             * store to parent if need parent
+             */
+            static::storeToParent($data, $request, $code);
             LetterIn::create($data);
             LetterHistory::create([
                 'code' => $code,
@@ -84,6 +88,23 @@ class LetterOutAgency
             ]);
 
             NotificationHelper::send($item->id, 'Surat Masuk', 'Kamu menerima surat masuk ' . join(" ", explode("-", $request->type)) . ' dari ' . auth()->user()->jobPosition->name);
+        }
+    }
+
+    public static function storeToParent($data, $request, $code)
+    {
+        $parentID = auth()->user()->jobPosition->parent_id ?? null;
+        $parent = JobPosition::where("id", $parentID)->get();
+        foreach ($parent as $item) {
+            LetterIn::create([
+                ...$data,
+                'job_position_id' => $item->id
+            ]);
+            LetterHistory::create([
+                'code' => $code,
+                'description' => $item->name . ' menerima naskah masuk ' . join(" ", explode("-", $request->type)) . ' dengan code ' . $code,
+                'is_read' => false
+            ]);
         }
     }
 

@@ -28,6 +28,12 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                            <label for="note">Note</label>
+                            <textarea name="note" id="note" class="form-control"></textarea>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -243,7 +243,8 @@ class LetterInForward
             'code' => $request->code,
             'job_position_id' => auth()->user()->job_position_id ?? "",
             'access' => "R",
-            "group" => $letterIn->group
+            "group" => $letterIn->group,
+            'note'=>$request->note
         ];
 
         LetterOut::create($data);
@@ -274,7 +275,8 @@ class LetterInForward
                 'code' => $request->code,
                 'job_position_id' => $item,
                 'access' => "F",
-                "group" => $letterIn->group
+                "group" => $letterIn->group,
+                'note'=>$request->note
             ];
             $jobPosition = JobPosition::where("id", $item)->first();
             LetterIn::create($data);

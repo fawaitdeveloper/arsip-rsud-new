@@ -25,6 +25,7 @@ use App\Models\LetterReply;
 use App\Models\LetterUrgency;
 use App\Models\Translucent;
 use App\Models\User;
+use App\Models\LetterNote;
 use Illuminate\Http\Request;
 
 class LetterInController extends Controller
@@ -201,7 +202,8 @@ class LetterInController extends Controller
         $histories = LetterHistory::where('code', $letterIn->code)->orderBy('id', 'DESC')->get();
         $replies = LetterReply::where("code", $letterIn->code)->get();
         $received = LetterReceived::where("code", $letterIn->code)->get();
-        return \view('dashboard.letter-in.show', \compact('letterIn', 'histories', 'flow', 'belowPosition', 'replies', 'received'));
+        $notes = LetterNote::where('code', $letterIn->code)->get();
+        return \view('dashboard.letter-in.show', \compact('letterIn', 'histories', 'flow', 'belowPosition', 'replies', 'received', 'notes'));
     }
 
     /**

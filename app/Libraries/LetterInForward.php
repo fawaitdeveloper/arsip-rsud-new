@@ -10,6 +10,7 @@ use App\Models\LetterHistory;
 use App\Models\LetterIn;
 use App\Models\LetterOut;
 use App\Models\LetterReceived;
+use App\Models\LetterNote;
 use App\Models\LetterReply;
 use Illuminate\Http\Request;
 
@@ -253,6 +254,8 @@ class LetterInForward
             'description' => auth()->user()->jobPosition->name . ' meneruskan surat' . join(" ", explode("-", $letterIn->type)) . ' dengan code ' . $request->code,
             'is_read' => false
         ]);
+
+        LetterNote::insertNote($request->code, $request->note);
 
         foreach ($request->job_position_id as $item) {
             $data = [

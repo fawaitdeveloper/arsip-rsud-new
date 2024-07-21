@@ -79,7 +79,15 @@
                     <tr>
                         <td>Catatan Naskah</td>
                         <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                        <td><b>{{ $letterIn->note ?? 'Tidak Ada' }}</b></td>
+                        <td>
+                            @if(count($notes)>0)
+                                @foreach($notes as $item)
+                                    <b> - {{ $item->note }}</b> <br>
+                                @endforeach
+                            @else
+                                <b>Tidak ada catatan</b>
+                            @endif
+                        </td>
                     </tr>
                 </table>
             </div>
